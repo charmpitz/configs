@@ -8,4 +8,4 @@ alias ...="cd ../../"
 alias create_shortcut="gnome-desktop-item-edit ~/.local/share/applications --create-new"
 
 # Alternative to `tail -f`
-alias log="${CONFIG_PATH}/lnav -c ":enable-word-wrap" $@"
+alias log="${CONFIG_PATH}/lnav/lnav -c ":enable-word-wrap" $@"
