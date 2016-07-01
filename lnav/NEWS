@@ -1,0 +1,254 @@
+
+lnav v0.8.0:
+     Features:
+     * Integration with "papertrailapp.com" for querying and tailing
+       server log and syslog messages.  See the Papertrail section in
+       the online help for more details.
+     * Remote files can be opened when lnav is built with libcurl v7.23.0+
+     * SQL queries can now be done on lines that match a regular expression
+       using the "log_search" table or by creating custom tables with the
+       ":create-search-table" command.
+     * Log formats that are "containers" for other log formats, like
+       syslog, are now supported.  See the online help for more
+       information.
+     * Formats can be installed from git repositories using the '-i' option.
+       A standard set of extra formats can be installed by doing
+       'lnav -i extra'. (You must have git installed for this to work.)
+     * Added support for 'VMware vSphere Auto Deploy' log format.
+     * Added a 'sudo' log format.
+     * Added hotkeys to move left/right by a smaller increment (H/L or
+       Shift+Left/Shift+Right).
+     * A color-coded bar has been added to the left side to show where
+       messages from one file stop and messages from another file start.
+     * The '-C' option will now try to check any specified log files to
+       make sure the format(s) match all of the lines.
+     * Added an "all_logs" SQLite table that contains the message format
+       extracted from each log line.  Also added a ';.msgformat' SQL command
+       that executes a query that returns the counts for each format and the
+       first line where the format was seen.
+     * Added an "lnav_views" SQLite table that can be used to query and
+       change the lnav view state.
+     * When typing in a command, the status bar will display a short
+       summary of the currently entered command.
+     * Added a "delete-filter" command.
+     * Added a "log_msg_instance" column to the logline and log_search
+       tables to make it easier to join tables that are matching log
+       messages that are ordered.
+     * Added a "timeslice()" function to SQLite so that it is easier to
+       group log messages by time buckets.
+     * The 'goto' command now supports relative time values like
+       'a minute ago', 'an hour later', and many more.
+
+     Interface Changes:
+     * The 'r/R' hotkeys have been reassigned to navigate through the log
+       messages by the relative time value that was last used with the
+       'goto' command.
+
+     Fixes:
+     * The pretty-print view should now work for text files.
+     * Nested fields in JSON logs are now supported for levels, bodies, etc...
+     * Tab-completion should work for quoted SQL identifiers.
+     * 'lo-fi' mode key shortcut changed to CTRL+L.
+     * 'redraw' shortcut removed. Relegated to just a command.
+     * Fixed lnav hang in pretty-print mode while doing a dns lookup.
+     * The generic log message parser used to extract data has been
+       optimized and should be a bit faster.
+
+lnav v0.7.3:
+     Features:
+     * Add 'pipe-to' and 'pipe-line-to' commands that pipe the currently
+       marked lines or the current log message to a shell command,
+       respectively.
+     * Added a "pretty-print" view (P hotkey) that tries to reformat log
+       messages so that they are easier to read.
+     * Added a 'redraw' command (CTRL+L hotkey) to redraw the window in
+       case it has been corrupted.
+     * Added a 'relative-goto' command to move the current view relative
+       to its current position.
+     * Experimental support for linking with jemalloc.
+     * The plain text view now supports filtering.
+     * Added 'next-mark' and 'prev-mark' commands to jump to the next or
+       previous bookmarked line (e.g. error, warning, ...)
+     * Added a 'zoom-to' command to change the zoom level of the histogram
+       view.
+     * Log formats can now define their own timestamp formats with the
+       'timestamp-format' field.
+
+     Fixes:
+     * Autotools scripts overhaul.
+     * Added a configure option to disable linking with libtinfo. The newer
+       versions of ncurses don't require it, however the build silently pulls
+       it in as a dependency, if it is available on the system. This can be
+       explicitly disabled using the '--disable-tinfo' option during configure.
+     * Fixed the configure script behavior to ignore the values specified using
+       the CFLAGS and LDFLAGS environment variables while searching for sqlite3
+       when '--with-sqlite3' switch was specified without the prefix.
+     * The configure script now recognizes libeditline symlink'ed to masquerade
+       as libreadline. This previously used to cause problems at compile time,
+       specially on OS X. If you come across this error, use the
+       '--with-readline=prefix' switch to specify the path to the correct
+       location of libreadline.
+     * The order that log formats are tried against a log file is now
+       automatically determined so that more specific formats are tested
+       before more general ones.  The order is determined on startup based on
+       how each format matches each other formats sample lines.
+     * Command files (i.e. those executed via the '-f' flag) now support
+       commands/queries that span more than one line.
+     * Added more log levels: stats, debug2 - debug5.
+
+lnav v0.7.2:
+     * Added log formats for vdsm, openstack, and the vmkernel.
+     * Added a "lo-fi" mode (L hotkey) that dumps the displayed log lines
+       to the terminal without any decorations.  The write-to, write-json-to,
+       and write-csv-to commands will also write their output to the terminal
+       when passed '-' as the file name.  This mode can be useful for copying
+       plain text lines to the clipboard.
+     * (OS X) Text search strings are copied to the system's "find" clipboard.
+       Also, when starting a new search, the current value in the "find"
+       clipboard can be tab-completed.
+
+lnav v0.7.1:
+     Features:
+     * Added an 'environ' SQL table that reflects lnav's environment
+       variables.  The table can be read and written to using SQL
+       SELECT, INSERT, UPDATE, and DELETE statements.  Setting variables
+       can be a way to use SQL query results in lnav commands.
+     * Added a 'jget' SQLite function that can extract fields from a JSON-
+       encoded value.
+     * Added log formats for the OpenAM identity provider.
+     * Added a 'clear-highlight' command to clear previous calls to the
+       'highlight' command.
+     * Fixed some performance bugs in indexing JSON log formats.  Loading
+       times should be at least five times faster.
+     * Filtering performance should be improved so that enabling/disabling
+       filters should be almost instantaneous.
+     * The filter-in, filter-out, and highlight commands now support
+       tab-completion of text in the current view.
+     * Add a '-i' flag that installs format files in: ~/.lnav/formats/installed
+
+lnav v0.7.0:
+     Features:
+     * Add the '.schema' SQL command to open a view that displays the schema
+       for the internal tables and any attached databases.  If lnav was only
+       executed with a SQLite database and no text files, this view will open
+       by default.
+     * The scroll bar now indicates the location of errors/warnings, search
+       hits, and bookmarks.
+     * The xterm title is update to reflect the file name for the top line
+       in the view.
+     * Added a "headless" mode so that you can execute commands and run SQL
+       queries from the command-line without having to do it from the curses
+       UI.
+     * When doing a search or SQL query, any text that is currently being
+       displayed can be tab-completed.
+     * The '-H' option was added so you can view the internal help text.
+     * Added the 'g/G' hotkeys to move to the top/bottom of the file.
+     * Added a 'log_mark' column to the log tables that indicates whether or
+       not a log message is bookmarked.  The field is writable, so you can
+       bookmark lines using an SQL UPDATE query.
+     * Added syntax-highlighting when editing SQL queries or search regexes.
+     * Added a "write-json-to" command that writes the result of a SQL query
+       to a JSON-formatted file.
+     * The "elapsed time" column now uses red/green coloring to indicate
+       sharp changes in the message rate.
+     * Added a "set-min-log-level" command to filter out log messages that
+       are below a given level.
+
+     Fixes:
+     * Performance improvements.
+     * Multi-line filtering has been fixed.
+     * A collator has been added to the log_level column in the log tables
+       so that you can write expressions like "log_level > 'warning'".
+     * The log_time datetime format now matches what is returned by
+       "datetime('now')" so that collating works correctly.
+     * If a search string is not valid PCRE syntax, a search is done for
+       the exact string instead of just returning an error.
+     * Static-linking has been cleaned up.
+     * OpenSSL is no longer a requirement.
+     * Alpha support for Windows/cygwin.
+     * Environment variables can now be accessed in SQL queries using
+       the syntax: $VAR_NAME
+     * An internal log is kept and written out on a crash.
+     * Partition bookmarks are now tracked separately from regular user
+       bookmarks.  You can start a partition with the 'partition-name'
+       command and remove it with the 'clear-partition' command.
+     * Improved display of possible matches during tab-completion in the
+       command-prompt.  The matches are now shown in a separate view and
+       pressing tab repeatedly will scroll through the view.
+     * The "open" command now does shell word expansion for file names.
+     * More config directory paths have been added: /etc/lnav,
+       $prefix/etc/lnav, and directories passed on the command-line with -I.
+
+lnav v0.6.2:
+     Features:
+     * Word-wrap support.
+
+     Fixes:
+     * Fix some OS X Mavericks build/runtime issues.
+
+lnav v0.6.1:
+     Features:
+     * Support for JSON-encoded log files.
+
+     Fixes:
+     * Some minor fixes and performance improvements.
+
+lnav v0.6.0:
+     Features:
+     * Custom log formats and more builtin formats
+     * Automatic extraction of data from logs
+     * UI improvements, support for 256 color terminals
+
+lnav v0.5.1:
+     Features:
+     * Added the '-t' and '-w' options which can be used to prepend a
+       timestamp to any data piped in on stdin and to specify a file to
+       write the contents of stdin to.
+
+     Fixes:
+     * Cleanup for packaging.
+
+lnav v0.5.0:
+     Features:
+     * Files can be specified on the command-line using wildcards so that
+       new files are automatically loaded.  Directories can also be passed
+       as command-line arguments to read all of the files in the directory.
+     * Builds on cygwin again.
+     * Added the 'C' hotkey to clear any existing user bookmarks.
+     * Added experimental support for accepting input from mice.
+
+     Fixes:
+     * Internal cleanup.
+     * Copying to the clipboard on OS X is now supported.
+     * Many bug fixes.
+
+lnav v0.4.0:
+     Features:
+     * Files that are not recognized as containing log messages have been
+       broken out to a separate text files view.  You can flip between the
+       log view and the text file view with the 't' hotkey.  When viewing
+       text files, the 'f' hotkey will switch between files.
+     * Files compressed with bzip2 are recognized and decompressed on the
+       fly.
+     * Added a "session" file and command for storing commands that should
+       be executed on startup.  For example, if you always want some
+       highlighting to be done, you can add that command to the session
+       file.
+
+     Fixes:
+     * Add some more log file formats for generic log files.
+     * Performance improvements for compressed files.
+     * Works on OS X now.
+
+lnav v0.3.0:
+     Changes:
+     * The hotkey for the SQL view was changed to 'v' and 'V' from '.'.
+
+     Features:
+     * You can now switch between the SQL result view and the log view while
+       keeping the top of the views in sync with the "line_number" column.
+
+     Fixes:
+     * The "line_number" column is no longer included in the SQL result view's
+       stacked bar graph.
+     * Added a "warnings" count to the histogram view.
