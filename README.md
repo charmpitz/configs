@@ -9,8 +9,3 @@ grep -q "source $PWD/bash_bootstrap.sh" ~/.bashrc || echo "source $PWD/bash_boot
 
 source ~/.bashrc
 ```
-
-Replace current value
-```
-sed -i "s|^source.*bash_bootstrap\.sh$|source $PWD\/bash_boostrap.sh|g" ~/.bashrc
-```
