@@ -31,3 +31,8 @@ alias mv='mv -iv'
 # Colored, ignore case and show line number by default
 alias grep='grep --color=auto -in'
 
+# Install
+alias I='sudo apt-get install $@'
+
+# Remove
+alias R='sudo apt-get remove --purge $@'
