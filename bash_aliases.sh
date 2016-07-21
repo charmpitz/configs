@@ -36,3 +36,6 @@ alias I='sudo apt-get install $@'
 
 # Remove
 alias R='sudo apt-get remove --purge $@'
+
+# Edit
+alias E='sudo nano $@'
