@@ -16,6 +16,9 @@ reset=$(tput -Txterm sgr0)
 # Include variables and custom configs
 source $CONFIG_PATH/bash_config.sh
 
+# Include functions
+source $CONFIG_PATH/bash_functions.sh
+
 # Include custom aliases
 source $CONFIG_PATH/bash_aliases.sh
 

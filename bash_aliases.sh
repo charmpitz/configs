@@ -31,11 +31,13 @@ alias mv='mv -iv'
 # Colored, ignore case and show line number by default
 alias grep='grep --color=auto -in'
 
-# Install
-alias I='sudo apt-get install $@'
-
-# Remove
-alias R='sudo apt-get remove --purge $@'
-
 # Edit
 alias E='sudo nano $@'
+
+# Install and automplete for it
+alias I='sudo apt-get install $@'
+complete -F _get_packages_autocomplete I
+
+# Remove and autocomplete for it
+alias R='sudo apt-get remove --purge $@'
+complete -F _get_packages_autocomplete R
