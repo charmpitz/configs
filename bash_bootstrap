@@ -14,13 +14,13 @@ bold=$(tput -Txterm bold)
 reset=$(tput -Txterm sgr0)
 
 # Include variables and custom configs
-source $CONFIG_PATH/bash_config.sh
+source $CONFIG_PATH/bash_config
 
 # Include functions
-source $CONFIG_PATH/bash_functions.sh
+source $CONFIG_PATH/bash_functions
 
 # Include custom aliases
-source $CONFIG_PATH/bash_aliases.sh
+source $CONFIG_PATH/bash_aliases
 
 # Include system bash completion
 [ -r /etc/bash_completion ] && source /etc/bash_completion
