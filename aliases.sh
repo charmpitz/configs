@@ -10,11 +10,9 @@ alias work="cd ~/workspace"
 # Go to /var/www
 alias www="cd /var/www"
 
-# Command to open the create shortcut window
-alias create_shortcut="gnome-desktop-item-edit ~/.local/share/applications --create-new"
-
 # Alternative to `tail -f`
-alias lnav="${CONFIG_PATH}/lnav/lnav -c ":enable-word-wrap" $@"
+alias lnav="lnav -c ":enable-word-wrap" $@"
+alias log="${CONFIG_PATH}/bin/lnav -c ":enable-word-wrap" $@"
 
 # Colored and classified
 alias ls='ls -F --color=always'
