@@ -21,6 +21,4 @@ function make_completion_wrapper () {
       return 0
     }"
   eval "$function"
-  echo $function_name
-  echo "$function"
 }
