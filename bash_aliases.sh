@@ -48,6 +48,9 @@ complete -F _get_packages_autocomplete I
 alias R='sudo apt-get remove --purge $@'
 complete -F _get_packages_autocomplete R
 
+# Update
+alias U='sudo apt-get update $@'
+
 # Vagrant alias
 alias v='vagrant $@'
 make_completion_wrapper _vagrant _get_vagrant_autocomplete vagrant
