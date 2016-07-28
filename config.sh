@@ -11,14 +11,15 @@ export PATH=$PATH:$CONFIG_PATH/bin
 PROMPT_COMMAND="find_git_branch; find_git_dirty; $PROMPT_COMMAND"
 
 # PS1 Variables
-RED="\[\e[38;5;9m\]"  # Red
+RED="\[\e[38;5;196m\]"  # Red
 GREEN="\[\e[38;5;2m\]"  # Green
 YELLOW="\[\e[38;5;142m\]"  # Yellow
 BLUE="\[\e[38;5;6m\]"  # Blue
 RESET="\[\e[0m\]"
 
+TIME="$BLUE\t"
 USER="$YELLOW\u"
 HOST="$YELLOW\h"
 DIR="$BLUE\W"
 
-export PS1="$RED[$USER@$HOST $DIR$RED] $GREEN$GIT_BRANCH\$ $RESET"
+export PS1="$RED[$RESET$TIME $USER@$HOST $BLUE$DIR$RED] $GREEN\$GIT_BRANCH\$ $RESET"
