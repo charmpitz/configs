@@ -6,6 +6,24 @@ _get_packages_autocomplete()
     return 0
 }
 
+# Service autocomplete
+_get_service_autocomplete()
+{ 
+    local cur prev words cword;
+    _init_completion || return;
+    [[ $cword -gt 2 ]] && return 0;
+    if [[ $cword -eq 1 && $prev == ?(*/)S ]]; then
+        _services;
+        [[ -e /etc/mandrake-release ]] && _xinetd_services;
+    else
+        local sysvdirs;
+        _sysvdirs;
+        COMPREPLY=($( compgen -W '`sed -e "y/|/ /" \
+            -ne "s/^.*\(U\|msg_u\)sage.*{\(.*\)}.*$/\2/p" \
+            ${sysvdirs[0]}/${prev##*/} 2>/dev/null` start stop' -- "$cur" ));
+    fi
+}
+
 # Autocomplete wrapper function
 # URL: http://unix.stackexchange.com/questions/4219/how-do-i-get-bash-completion-for-command-aliases 
 function make_completion_wrapper () {

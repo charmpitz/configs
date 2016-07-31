@@ -23,3 +23,10 @@ grep -q "source $PWD/bootstrap.sh" ~/.bashrc || echo "source $PWD/bootstrap.sh" 
 
 source ~/.bashrc
 ```
+
+
+### How to check for complete functions
+http://unix.stackexchange.com/questions/224227/how-do-you-make-an-alias-or-function-that-retains-tab-completion?rq=1
+
+### How to see a function definition
+http://stackoverflow.com/questions/6916856/can-bash-show-a-functions-definition

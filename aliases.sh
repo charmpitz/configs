@@ -49,6 +49,10 @@ complete -F _get_packages_autocomplete R
 # Update
 alias U='sudo apt-get update $@'
 
+# Service
+alias S='sudo service $@'
+complete -F _get_service_autocomplete S
+
 # Vagrant alias
 alias v='vagrant $@'
 make_completion_wrapper _vagrant _get_vagrant_autocomplete vagrant
