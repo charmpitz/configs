@@ -41,6 +41,7 @@ function make_completion_wrapper () {
     eval "$function"
 }
 
+# Used for the PS1 to find what git branch you are on
 find_git_branch() {
     # Based on: http://stackoverflow.com/a/13003854/170413
     local branch
@@ -54,6 +55,7 @@ find_git_branch() {
     fi
 }
 
+# Used for the PS1 to find what git branch you are on - dirty version
 find_git_dirty() {
     local status=$(git status --porcelain 2> /dev/null)
     if [[ "$status" != "" ]]; then
@@ -61,4 +63,9 @@ find_git_dirty() {
     else
         GIT_DIRTY=''
     fi
+}
+
+# Check if a command exists
+command_exists () {
+    type "$1" &> /dev/null ;
 }

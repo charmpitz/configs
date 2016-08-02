@@ -53,10 +53,12 @@ alias U='sudo apt-get update $@'
 alias S='sudo service $@'
 complete -F _get_service_autocomplete S
 
-# Vagrant alias
-alias v='vagrant $@'
-make_completion_wrapper _vagrant _get_vagrant_autocomplete vagrant
-complete -F _get_vagrant_autocomplete v
-
 # Fix web directory permissions 755 644
 alias fix_web_permiossions='sudo find * -type d -print0 | sudo xargs -0 chmod 0755 && sudo find * -type f -print0 | sudo xargs -0 chmod 0644'
+
+# Vagrant alias
+if command_exists vagrant ; then
+	alias v='vagrant $@'
+	make_completion_wrapper _vagrant _get_vagrant_autocomplete vagrant
+	complete -F _get_vagrant_autocomplete v
+fi
