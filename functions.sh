@@ -6,6 +6,22 @@ _get_packages_autocomplete()
     return 0
 }
 
+# Packages remove autocomplete
+_get_packages_remove_autocomplete () 
+{
+    local cur opt;
+    COMPREPLY=();
+    cur="${COMP_WORDS[COMP_CWORD]}";
+
+    if [ -f /etc/debian_version ]; then
+        COMPREPLY=($( _xfunc dpkg _comp_dpkg_installed_packages $cur ));
+    else
+        _xfunc rpm _rpm_installed_packages;
+    fi;
+
+    return 0
+}
+
 # Service autocomplete
 _get_service_autocomplete()
 { 

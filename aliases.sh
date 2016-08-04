@@ -40,7 +40,7 @@ alias E='sudo nano $@'
 
 # Install and automplete
 alias I='sudo apt-get install $@'
-complete -F _get_packages_autocomplete I
+complete -F _get_packages_remove_autocomplete I
 
 # Remove and autocomplete
 alias R='sudo apt-get remove --purge $@'
@@ -57,8 +57,6 @@ complete -F _get_service_autocomplete S
 alias fix_web_permiossions='sudo find * -type d -print0 | sudo xargs -0 chmod 0755 && sudo find * -type f -print0 | sudo xargs -0 chmod 0644'
 
 # Vagrant alias
-if command_exists vagrant ; then
-	alias v='vagrant $@'
-	make_completion_wrapper _vagrant _get_vagrant_autocomplete vagrant
-	complete -F _get_vagrant_autocomplete v
-fi
+alias v='vagrant $@'
+make_completion_wrapper vagrant _get_vagrant_autocomplete vagrant
+complete -F _get_vagrant_autocomplete v
