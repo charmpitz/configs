@@ -42,7 +42,7 @@ _get_service_autocomplete()
 
 # Autocomplete wrapper function
 # URL: http://unix.stackexchange.com/questions/4219/how-do-i-get-bash-completion-for-command-aliases 
-function make_completion_wrapper () {
+make_completion_wrapper () {
     local function_name="$2"
     local arg_count=$(($#-3))
     local comp_function_name="$1"

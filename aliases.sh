@@ -54,7 +54,10 @@ alias S='sudo service $@'
 complete -F _get_service_autocomplete S
 
 # Fix web directory permissions 755 644
-alias fix_web_permiossions='sudo find * -type d -print0 | sudo xargs -0 chmod 0755 && sudo find * -type f -print0 | sudo xargs -0 chmod 0644'
+alias fix_web_permissions='sudo find * -type d -print0 | sudo xargs -0 chmod 0755 && sudo find * -type f -print0 | sudo xargs -0 chmod 0644'
+
+# Fix symfony write permissions
+alias fix_sf_permissions='sudo chmod -R g+w var/logs/; sudo chmod -R g+w var/cache/'
 
 # Vagrant alias
 alias v='vagrant $@'
