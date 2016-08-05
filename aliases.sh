@@ -40,11 +40,11 @@ alias E='sudo nano $@'
 
 # Install and automplete
 alias I='sudo apt-get install $@'
-complete -F _get_packages_remove_autocomplete I
+complete -F _get_packages_autocomplete I
 
 # Remove and autocomplete
 alias R='sudo apt-get remove --purge $@'
-complete -F _get_packages_autocomplete R
+complete -F _get_packages_remove_autocomplete R
 
 # Update
 alias U='sudo apt-get update $@'
