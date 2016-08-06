@@ -17,8 +17,6 @@ git clone git@bitbucket.org:charmpitz/configs.git
 
 cd configs
 
-composer global require stecman/composer-bash-completion-plugin dev-master
-
 grep -q "source $PWD/bootstrap.sh" ~/.bashrc || echo "source $PWD/bootstrap.sh" >> ~/.bashrc
 
 source ~/.bashrc

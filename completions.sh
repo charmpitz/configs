@@ -4,5 +4,5 @@
 # Include git completion
 [ -r $CONFIG_PATH/completions/git.bash ] && source $CONFIG_PATH/completions/git.bash
 
-# Include composer completion
-[ -r $CONFIG_PATH/completions/composer.bash ] && source $CONFIG_PATH/completions/composer.bash
+# Include symfony, composer, phpspec, behat completion
+[ -r $CONFIG_PATH/completions/symfony.bash ] && source $CONFIG_PATH/completions/symfony.bash
