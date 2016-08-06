@@ -35,7 +35,7 @@ PS1_DIR="$BOLD$BLUE\W$RESET"
 PS1_VAGRANT=""
 
 if [[ $USER == 'vagrant' ]]; then
-	PS1_VAGRANT=" $bldylw ⚓ ⚒ ⚓ $RESET "
+	PS1_VAGRANT=" $bldylw ⚒ ⚒ ⚒ $RESET "
 fi
 
 export PS1="$PS1_VAGRANT[$PS1_TIME $PS1_USER@$PS1_HOST $BLUE$PS1_DIR ] $BOLD$GREEN\$GIT_BRANCH$bldylw ⚡ $RESET"
