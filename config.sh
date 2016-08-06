@@ -21,15 +21,21 @@ export PATH=$PATH:$CONFIG_PATH/bin
 PROMPT_COMMAND="find_git_branch; find_git_dirty; $PROMPT_COMMAND"
 
 # PS1 Variables
+BOLD="\e[1m"
 RED="\[\e[38;5;196m\]"  # Red
 GREEN="\[\e[38;5;2m\]"  # Green
 YELLOW="\[\e[38;5;142m\]"  # Yellow
-BLUE="\[\e[38;5;6m\]"  # Blue
+BLUE="\[\e[38;5;30m\]"  # Blue
 RESET="\[\e[0m\]"
 
-TIME="$BLUE\t"
-USER="$YELLOW\u"
-HOST="$YELLOW\h"
-DIR="$BLUE\W"
+PS1_TIME="⚬ \t ⚬$RESET"
+PS1_USER="$BOLD$YELLOW\u"
+PS1_HOST="$BOLD$YELLOW\h$RESET"
+PS1_DIR="$BOLD$BLUE\W$RESET"
+PS1_VAGRANT=""
 
-export PS1="$RED[$RESET$TIME $USER@$HOST $BLUE$DIR$RED] $GREEN\$GIT_BRANCH\$ $RESET"
+if [[ $USER == 'vagrant' ]]; then
+	PS1_VAGRANT=" $bldylw ⚒⚒⚒ $RESET "
+fi
+
+export PS1="$PS1_VAGRANT$PS1_TIME $PS1_USER@$PS1_HOST $BLUE$PS1_DIR $GREEN\$GIT_BRANCH$bldylw ⚡ $RESET"
