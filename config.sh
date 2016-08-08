@@ -28,7 +28,7 @@ YELLOW="\[\e[38;5;142m\]"  # Yellow
 BLUE="\[\e[38;5;30m\]"  # Blue
 RESET="\[\e[0m\]"
 
-PS1_TIME="⚬ \t ⚬$RESET"
+PS1_TIME="\t$RESET"
 PS1_USER="$BOLD$YELLOW\u"
 PS1_HOST="$BOLD$YELLOW\h$RESET"
 PS1_DIR="$BOLD$BLUE\W$RESET"
