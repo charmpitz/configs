@@ -28,16 +28,16 @@ YELLOW="\[\e[38;5;142m\]"  # Yellow
 BLUE="\[\e[38;5;30m\]"  # Blue
 RESET="\[\e[0m\]"
 
-PS1_TIME="\t$RESET"
-PS1_USER="$BOLD$YELLOW\u"
-PS1_HOST="$BOLD$YELLOW\h$RESET"
-PS1_DIR="$BOLD$BLUE\W$RESET"
-PS1_VAGRANT=""
+XXX_TIME="\t$RESET"
+XXX_USER="$BOLD$YELLOW\u"
+XXX_HOST="$BOLD$YELLOW\h$RESET"
+XXX_DIR="$BOLD$BLUE\W$RESET"
+XXX_VAGRANT=""
 
 if [[ $USER == 'vagrant' ]]; 
 then
-	export PS1="[$bldylw ⚒ ⚒ ⚒ $PS1_USER @ $PS1_HOST $bldylw ⚒ ⚒ ⚒ $RESET $PS1_DIR ] $BOLD$GREEN\$GIT_BRANCH$bldylw ⚡ $RESET"
+	export PS1="[$bldylw ⚒ ⚒ ⚒ $XXX_USER @ $XXX_HOST $bldylw ⚒ ⚒ ⚒ $RESET $XXX_DIR ] $BOLD$GREEN\$GIT_BRANCH$bldylw ⚡ $RESET"
 else
-	export PS1="[$PS1_TIME $PS1_USER@$PS1_HOST $BLUE$PS1_DIR ] $BOLD$GREEN\$GIT_BRANCH$bldylw ⚡ $RESET"
+	export PS1="[$XXX_TIME $XXX_USER@$XXX_HOST $BLUE$XXX_DIR ] $BOLD$GREEN\$GIT_BRANCH$bldylw ⚡ $RESET"
 fi
 
