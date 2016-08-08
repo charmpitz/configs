@@ -57,27 +57,14 @@ make_completion_wrapper () {
     eval "$function"
 }
 
-# Used for the PS1 to find what git branch you are on
-find_git_branch() {
-    # Based on: http://stackoverflow.com/a/13003854/170413
-    local branch
-    if branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null); then
-        if [[ "$branch" == "HEAD" ]]; then
-            branch='detached*'
-        fi
-        GIT_BRANCH="($branch)"
+# Get current branch in git repo
+function parse_git_branch() {
+    BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+    if [ ! "${BRANCH}" == "" ]
+    then
+        echo "[${BRANCH}]"
     else
-        GIT_BRANCH=""
-    fi
-}
-
-# Used for the PS1 to find what git branch you are on - dirty version
-find_git_dirty() {
-    local status=$(git status --porcelain 2> /dev/null)
-    if [[ "$status" != "" ]]; then
-        GIT_DIRTY='*'
-    else
-        GIT_DIRTY=''
+        echo ""
     fi
 }
 

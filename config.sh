@@ -17,27 +17,5 @@ export PATH=$PATH:$HOME/bin
 # Add $CONFIG_PATH to the PATH
 export PATH=$PATH:$CONFIG_PATH/bin
 
-# Git Prompt variable
-PROMPT_COMMAND="find_git_branch; find_git_dirty; $PROMPT_COMMAND"
-
-# PS1 Variables
-BOLD="\e[1m"
-RED="\[\e[38;5;196m\]"  # Red
-GREEN="\[\e[38;5;70m\]"  # Green
-YELLOW="\[\e[38;5;142m\]"  # Yellow
-BLUE="\[\e[38;5;30m\]"  # Blue
-RESET="\[\e[0m\]"
-
-PS1_TIME="⚬ \t ⚬$RESET"
-PS1_USER="$BOLD$YELLOW\u"
-PS1_HOST="$BOLD$YELLOW\h$RESET"
-PS1_DIR="$BOLD$BLUE\W$RESET"
-PS1_VAGRANT=""
-
-if [[ $USER == 'vagrant' ]]; 
-then
-	export PS1="[$bldylw ⚒ ⚒ ⚒ $PS1_USER @ $PS1_HOST $bldylw ⚒ ⚒ ⚒ $RESET $PS1_DIR ] $BOLD$GREEN\$GIT_BRANCH$bldylw ⚡ $RESET"
-else
-	export PS1="[$PS1_TIME $PS1_USER@$PS1_HOST $BLUE$PS1_DIR ] $BOLD$GREEN\$GIT_BRANCH$bldylw ⚡ $RESET"
-fi
-
+# Bash PS1
+export PS1="[\[⚬\] \t \[⚬\] \[\e[33m\]\u\[\e[m\]\[\e[33m\]@\[\e[m\]\[\e[33m\]\h\[\e[m\] \[\e[34m\]\W\[\e[m\]] \[\e[32m\]\`parse_git_branch\`\[\e[m\] \[\e[33m\]\[⚡\]\[\e[m\] "
