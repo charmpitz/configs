@@ -18,4 +18,4 @@ export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$CONFIG_PATH/bin
 
 # Bash PS1
-export PS1="[\[⚬\] \t \[⚬\] \[\e[33m\]\u\[\e[m\]\[\e[33m\]@\[\e[m\]\[\e[33m\]\h\[\e[m\] \[\e[34m\]\W\[\e[m\]] \[\e[32m\]\`parse_git_branch\`\[\e[m\] \[\e[33m\]\[⚡\]\[\e[m\] "
+export PS1="[\[⚬\] \t \[⚬\] \[\e[33m\]\u\[\e[m\]\[\e[33m\]@\[\e[m\]\[\e[33m\]\h\[\e[m\] \[\e[34m\]\w\[\e[m\]] \[\e[32m\]\`parse_git_branch\`\[\e[m\] \[\e[33m\]\[⚡\]\[\e[m\] "
