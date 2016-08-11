@@ -44,8 +44,15 @@ _symfony()
     fi
 }
 
+# Enable completion for symfony console
 complete -o default -F _symfony console
+
+# Enable completion for rabbit-mq-admin-toolkit
+complete -o default -F _symfony rabbit
+
+# Enable completion for composer
 complete -o default -F _symfony composer
+
 complete -o default -F _symfony php-cs-fixer
 complete -o default -F _symfony phpspec
 complete -o default -F _symfony behat
