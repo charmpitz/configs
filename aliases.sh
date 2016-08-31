@@ -63,3 +63,6 @@ alias fix_sf_permissions='sudo chmod -R g+w var/logs/; sudo chmod -R g+w var/cac
 alias v='vagrant $@'
 make_completion_wrapper vagrant _get_vagrant_autocomplete vagrant
 complete -F _get_vagrant_autocomplete v
+
+# Search for something (what, where)
+alias ss='grep -Hirn $1 $2 2>/dev/null'
