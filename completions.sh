@@ -6,3 +6,6 @@
 
 # Include symfony, composer, phpspec, behat completion
 [ -r $CONFIG_PATH/completions/symfony.bash ] && source $CONFIG_PATH/completions/symfony.bash
+
+# Include phpunit completion
+[ -r $CONFIG_PATH/completions/phpunit.bash ] && source $CONFIG_PATH/completions/phpunit.bash
