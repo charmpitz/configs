@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if command_exists phpunit ; then
-    __phpunit_opts=`phpunit --help | grep -o -e "\-\-[a\-z\-]*"`
+    __phpunit_opts=`phpunit --help | egrep -o "\-\-[a\-z\-]*"`
 
     _phpunit_completion()
     {
