@@ -13,12 +13,10 @@ cat ~/.ssh/id_rsa.pub | xclip -sel clip
 
 3) Install
 ```
+cd ~/
 git clone git@bitbucket.org:charmpitz/configs.git
-
 cd configs
-
 grep -q "source $PWD/bootstrap.sh" ~/.bashrc || echo "source $PWD/bootstrap.sh" >> ~/.bashrc
-
 source ~/.bashrc
 ```
 
