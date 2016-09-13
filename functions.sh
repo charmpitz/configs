@@ -7,7 +7,7 @@ _get_packages_autocomplete()
 }
 
 # Packages remove autocomplete
-_get_packages_remove_autocomplete () 
+_get_packages_remove_autocomplete ()
 {
     local cur opt;
     COMPREPLY=();
@@ -24,7 +24,7 @@ _get_packages_remove_autocomplete ()
 
 # Service autocomplete
 _get_service_autocomplete()
-{ 
+{
     local cur prev words cword;
     _init_completion || return;
     [[ $cword -gt 2 ]] && return 0;
@@ -41,7 +41,7 @@ _get_service_autocomplete()
 }
 
 # Autocomplete wrapper function
-# URL: http://unix.stackexchange.com/questions/4219/how-do-i-get-bash-completion-for-command-aliases 
+# URL: http://unix.stackexchange.com/questions/4219/how-do-i-get-bash-completion-for-command-aliases
 make_completion_wrapper () {
     local function_name="$2"
     local arg_count=$(($#-3))
@@ -62,7 +62,7 @@ function parse_git_branch() {
     BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
     if [ ! "${BRANCH}" == "" ]
     then
-        echo "[${BRANCH}]"
+        echo "[${BRANCH}] "
     else
         echo ""
     fi
