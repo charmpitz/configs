@@ -32,8 +32,8 @@ alias rm='rm -i'
 # Prompt and verbose
 alias mv='mv -iv'
 
-# Colored, ignore case and show line number by default
-alias grep='grep --color=auto -in'
+# Colored, ignore case grep
+alias grep='grep --color=auto -i'
 
 # Edit
 alias E='sudo nano $@'
