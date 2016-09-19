@@ -1,5 +1,12 @@
 ## README ##
 
+### Dependencies ###
+Make sure you have bash-completion installed
+```sh
+sudo apt-get install bash-completion
+```
+
+### Installation
 1) Set Up Git
 ```
 git config --global user.name "Andrei Pit"
