@@ -97,6 +97,12 @@ class ConfigTower:
     class Machine:
         # SSH connection service
         ssh = None
+        # Connection credentials
+        hostname = None
+        username = None
+        password = None
+        ssh_key = None
+        path = None
 
         def __init__(self, hostname, username, password, ssh_key, path):
             self.hostname = hostname
