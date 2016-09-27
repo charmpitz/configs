@@ -66,6 +66,7 @@ class ConfigTower:
                     mcfg["path"],
                 )
                 machine.connect()
+                Print.blue('Connected to ' + machine.hostname)
                 # Check if already installed
                 if machine.path_exists() == True:
                     # Update
@@ -81,16 +82,13 @@ class ConfigTower:
                     Print.green(machine.hostname + ': Repository cloned successfully.')
             except paramiko.AuthenticationException as exc:
                 Print.red(machine.hostname + ': Authentication failed.')
-                sys.exit()
             except paramiko.BadHostKeyException as exc:
                 Print.red(machine.hostname + ': Host key could not be verified.')
-                sys.exit()
             except paramiko.SSHException as exc:
                 Print.red(machine.hostname + ': Something went wrong.')
-                print exc
-                sys.exit()
             finally:
                 machine.disconnect()
+                Print.blue('Connection to ' + machine.hostname + ' closed.')
         Print.purple('Everything went accordingly.')
 
 
@@ -121,12 +119,10 @@ class ConfigTower:
                 password=self.password,
                 key_filename=self.ssh_key
             )
-            Print.blue('Connected to ' + self.hostname)
 
         # Disconnect from the machine
         def disconnect(self):
             self.ssh.close()
-            Print.blue('Connection to ' + self.hostname + ' closed.')
 
         # Check if the repository path exists on the machine
         def path_exists(self):
