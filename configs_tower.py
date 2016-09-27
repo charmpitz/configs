@@ -3,7 +3,6 @@
 import yaml
 import paramiko
 import sys
-import socket
 
 class Print:
     RED = '\033[91m'
