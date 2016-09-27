@@ -120,7 +120,7 @@ class ConfigTower:
         # Disconnect from the machine
         def disconnect(self):
             self.ssh.close()
-            Print.green('Connection to ' + self.hostname + ' closed.')
+            Print.blue('Connection to ' + self.hostname + ' closed.')
 
         # Check if the repository path exists on the machine
         def path_exists(self):

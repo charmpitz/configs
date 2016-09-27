@@ -7,5 +7,11 @@ machines:
         password: vagrant
         ssh_key: /home/ady/workspace/vagrant_symfony/puphpet/files/dot/ssh/id_rsa
         path: /home/vagrant/configs
+    -
+        hostname: symfony-dev.local
+        username: vagrant
+        password: vagrant
+        ssh_key: /home/ady/workspace/vagrant_symfony/puphpet/files/dot/ssh/id_rsa
+        path: /home/vagrant/configs
 
 
