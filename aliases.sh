@@ -11,8 +11,8 @@ alias work="cd ~/workspace"
 alias www="cd /var/www"
 
 # Alternative to `tail -f`
-alias lnav="lnav -c ":enable-word-wrap" $@"
-alias log="${CONFIG_PATH}/bin/lnav -c ":enable-word-wrap" $@"
+alias lnav="lnav -c \":enable-word-wrap\" $@"
+alias log="${CONFIG_PATH}/bin/lnav -c \":enable-word-wrap\" $@"
 
 # Colored and classified
 alias ls='ls -F --color=always'
@@ -66,3 +66,37 @@ complete -F _get_vagrant_autocomplete v
 
 # Search for something (what, where)
 alias ss='grep -Hirn $1 $2 2>/dev/null'
+
+# Git status
+alias gs='git status'
+
+# Git stash
+alias gsh='git stash'
+
+# Git stash pop
+alias gshp='git stash pop'
+
+# Git pull origin {current_branch}
+alias gpl="git pull origin `get_git_branch`"
+
+# Git push origin {current_branch}
+alias gps="git push origin `get_git_branch`"
+
+# Git add
+alias ga="git add $@"
+
+# Git add all
+alias gaa="git add --all ."
+
+# Git reset
+alias gr="git reset $@"
+
+# Git reset HEAD
+alias grh="git reset HEAD"
+
+# Git commit
+alias gcm="git commit -m \"`get_git_task_feature`${1//\"/}\""
+
+
+
+

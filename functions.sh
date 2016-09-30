@@ -57,9 +57,28 @@ make_completion_wrapper () {
     eval "$function"
 }
 
+# Get git branch
+function get_git_branch() {
+    echo `git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+}
+
+# Get git branch feature
+# For the tasks with feature/{TASK}
+function get_git_task_feature() {
+    BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+    ARRAY=(${BRANCH//\// })
+    if [ ! -z "${ARRAY[1]}" ]
+    then
+        echo "[${ARRAY[1]}] - "
+    else
+        echo ""
+    fi
+}
+
+
 # Get current branch in git repo
 function parse_git_branch() {
-    BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+    BRANCH=`get_git_branch`
     if [ ! "${BRANCH}" == "" ]
     then
         echo "[${BRANCH}] "

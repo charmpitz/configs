@@ -64,7 +64,9 @@ class ConfigTower:
                     mcfg["ssh_key"],
                     mcfg["path"],
                 )
-                machine.connect()
+                if not machine.connect():
+                    Print.red('SSH key and password are missing.')
+                    continue
                 Print.blue('Connected to ' + machine.hostname)
                 # Check if already installed
                 if machine.path_exists() == True:
@@ -112,12 +114,21 @@ class ConfigTower:
         def connect(self):
             self.ssh = paramiko.SSHClient()
             self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-            self.ssh.connect(
-                self.hostname,
-                username=self.username,
-                password=self.password,
-                key_filename=self.ssh_key
-            )
+            if self.ssh_key:
+                self.ssh.connect(
+                    self.hostname,
+                    username=self.username,
+                    key_filename=self.ssh_key
+                )
+            elif self.password:
+                self.ssh.connect(
+                    self.hostname,
+                    username=self.username,
+                    password=self.password,
+                )
+            else:
+                return False
+            return True
 
         # Disconnect from the machine
         def disconnect(self):

@@ -2,16 +2,22 @@ repository: git@bitbucket.org:charmpitz/configs.git
 deployment_key: /home/ady/configs/deployment_key
 machines:
     -
-        hostname: symfony-dev.local
-        username: vagrant
-        password: vagrant
-        ssh_key: /home/ady/workspace/vagrant_symfony/puphpet/files/dot/ssh/id_rsa
-        path: /home/vagrant/configs
+        hostname: dev.emo.etsgbv-work.com
+        username: ubuntu
+        password:
+        ssh_key:
+        path: /home/ubuntu/configs
     -
-        hostname: symfony-dev.local
-        username: vagrant
-        password: vagrant
-        ssh_key: /home/ady/workspace/vagrant_symfony/puphpet/files/dot/ssh/id_rsa
-        path: /home/vagrant/configs
+        hostname: dev.tes.etsgbv-work.com
+        username: ubuntu
+        password: ubuntu
+        ssh_key:
+        path: /home/ubuntu/configs
+    # -
+    #     hostname: symfony-dev.local
+    #     username: vagrant
+    #     password: vagrant
+    #     ssh_key: /home/ady/workspace/vagrant_symfony/puphpet/files/dot/ssh/id_rsa
+    #     path: /home/vagrant/configs
 
 
