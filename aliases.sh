@@ -95,7 +95,7 @@ alias gr="git reset $@"
 alias grh="git reset HEAD"
 
 # Git commit
-alias gcm="git commit -m \"`get_git_task_feature`${1//\"/}\""
+alias gcm='git commit -m "`get_git_task_feature`${@//\"/}"'
 
 
 
