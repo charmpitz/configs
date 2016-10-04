@@ -130,18 +130,23 @@ class ConfigTower:
                 return False
             return True
 
+        def exec_command(self, command):
+            stdin, stdout, stderr = self.ssh.exec_command(command)
+            Print.red(stderr);
+            Print.blue(stdout);
+
         # Disconnect from the machine
         def disconnect(self):
             self.ssh.close()
 
         # Check if the repository path exists on the machine
         def path_exists(self):
-            stdin, stdout, stderr = self.ssh.exec_command('if [ -d "' + self.path + '" ]; then echo "1"; else echo "0"; fi')
+            stdin, stdout, stderr = self.exec_command('if [ -d "' + self.path + '" ]; then echo "1"; else echo "0"; fi')
             return int(stdout.readline()) == 1
 
         # Updates the repo from the path
         def update_repo(self):
-            self.ssh.exec_command('cd ' + self.path + '; git pull origin master;');
+            self.exec_command('cd ' + self.path + '; git pull origin master;');
 
         # Copying the dpl_key to temp
         def copy_dpl_key(self, dpl_key, dpl_tmp_path):
@@ -150,15 +155,15 @@ class ConfigTower:
             sftp.put(dpl_key, dpl_tmp_path)
             sftp.close()
             # Set the right permissions
-            self.ssh.exec_command('chmod 600 ' + dpl_tmp_path)
+            self.exec_command('chmod 600 ' + dpl_tmp_path)
 
         # Removes tmp dpl_key
         def rm_dpl_key(self, dpl_tmp_path):
-            self.ssh.exec_command('rm -f ' + dpl_tmp_path)
+            self.exec_command('rm -f ' + dpl_tmp_path)
 
         # Clones the repo
         def clone_repo(self, repository, dpl_key_path):
-            stdin, stdout, stderr = self.ssh.exec_command('ssh-agent bash -c \'ssh-add ' + dpl_key_path + '; git clone ' + repository +'\' ' + self.path)
+            stdin, stdout, stderr = self.exec_command('ssh-agent bash -c \'ssh-add ' + dpl_key_path + '; git clone ' + repository +'\' ' + self.path)
             # Waits for the command to finish
             result = stdout.channel.recv_exit_status()
 
