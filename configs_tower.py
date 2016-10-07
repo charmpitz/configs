@@ -34,6 +34,9 @@ class ConfigTower:
     repository = None
     # Deployment key
     dpl_key = None
+    # Git credentials
+    git_credentials = None
+
 
     def __init__(self, config_file):
         # Read the yml
@@ -42,6 +45,7 @@ class ConfigTower:
         self.machines = config["machines"]
         self.repository = config["repository"]
         self.dpl_key = config["deployment_key"]
+        self.git_credentials = config["git"]["credentials"]
 
     # Read from the config file
     def read_config(self, config_file):
@@ -67,7 +71,7 @@ class ConfigTower:
                 if not machine.connect():
                     Print.red('SSH key and password are missing.')
                     continue
-                Print.blue('Connected to ' + machine.hostname)
+                Print.yellow('Connected to ' + machine.hostname)
                 # Check if already installed
                 if machine.path_exists() == True:
                     # Update
@@ -78,7 +82,14 @@ class ConfigTower:
                     Print.yellow(machine.hostname + ': Repository folder not found. Cloning..')
                     dpl_tmp_path = '/tmp/dpl_key'
                     machine.copy_dpl_key(self.dpl_key, dpl_tmp_path)
+                    machine.chmod('600', dpl_tmp_path)
+                    machine.set_git_credentials(self.git_credentials)
+                    if not machine.file_exists(dpl_tmp_path):
+                        Print.red(machine.hostname + ': Deployment key does not exist.');
+                        continue
+
                     machine.clone_repo(self.repository, dpl_tmp_path)
+                    machine.exec_command('cd ' + machine.path +'; grep -q "source $PWD/bootstrap.sh" ~/.bashrc || echo "source $PWD/bootstrap.sh" >> ~/.bashrc')
                     machine.rm_dpl_key(dpl_tmp_path)
                     Print.green(machine.hostname + ': Repository cloned successfully.')
             except paramiko.AuthenticationException as exc:
@@ -89,7 +100,7 @@ class ConfigTower:
                 Print.red(machine.hostname + ': Something went wrong.')
             finally:
                 machine.disconnect()
-                Print.blue('Connection to ' + machine.hostname + ' closed.')
+                Print.yellow('Connection to ' + machine.hostname + ' closed.')
         Print.purple('Everything went accordingly.')
 
 
@@ -130,10 +141,14 @@ class ConfigTower:
                 return False
             return True
 
-        def exec_command(self, command):
+        def exec_command(self, command, print_errors = True):
             stdin, stdout, stderr = self.ssh.exec_command(command)
-            Print.red(stderr);
-            Print.blue(stdout);
+            # Print errors
+            if print_errors:
+                for line in stderr.readlines():
+                    Print.red(line);
+
+            return stdin, stdout, stderr
 
         # Disconnect from the machine
         def disconnect(self):
@@ -142,11 +157,29 @@ class ConfigTower:
         # Check if the repository path exists on the machine
         def path_exists(self):
             stdin, stdout, stderr = self.exec_command('if [ -d "' + self.path + '" ]; then echo "1"; else echo "0"; fi')
-            return int(stdout.readline()) == 1
+
+            line = stdout.readline()
+            if line:
+                return int(line) == 1
+
+            return 0
+
+        def file_exists(self, file_path):
+            stdin, stdout, stderr = self.exec_command('if [ -f "' + file_path + '" ]; then echo "1"; else echo "0"; fi')
+
+            line = stdout.readline()
+            if line:
+                return int(line) == 1
+
+            return 0
+
+        def set_git_credentials(self, credentials):
+            stdin, stdout, stderr = self.exec_command('git config --global user.name "' + credentials["name"] + '"')
+            stdin, stdout, stderr = self.exec_command('git config --global user.email "' + credentials["email"] + '"')
 
         # Updates the repo from the path
         def update_repo(self):
-            self.exec_command('cd ' + self.path + '; git pull origin master;');
+            self.exec_command('cd ' + self.path + '; git pull origin master;', False);
 
         # Copying the dpl_key to temp
         def copy_dpl_key(self, dpl_key, dpl_tmp_path):
@@ -154,8 +187,11 @@ class ConfigTower:
             sftp = self.ssh.open_sftp()
             sftp.put(dpl_key, dpl_tmp_path)
             sftp.close()
-            # Set the right permissions
-            self.exec_command('chmod 600 ' + dpl_tmp_path)
+
+        # Set permissions
+        def chmod(self, mod, file_path):
+            self.exec_command('chmod ' + mod + ' ' + file_path)
+
 
         # Removes tmp dpl_key
         def rm_dpl_key(self, dpl_tmp_path):
@@ -163,9 +199,8 @@ class ConfigTower:
 
         # Clones the repo
         def clone_repo(self, repository, dpl_key_path):
-            stdin, stdout, stderr = self.exec_command('ssh-agent bash -c \'ssh-add ' + dpl_key_path + '; git clone ' + repository +'\' ' + self.path)
+            stdin, stdout, stderr = self.exec_command('ssh-agent bash -c \'ssh-add ' + dpl_key_path + '; git clone ' + repository +'\' ' + self.path, False)
             # Waits for the command to finish
             result = stdout.channel.recv_exit_status()
-
 
 ConfigTower('configs.yml').execute()
