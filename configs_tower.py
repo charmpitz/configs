@@ -147,7 +147,8 @@ class ConfigTower:
             if print_errors:
                 for line in stderr.readlines():
                     Print.red(line);
-
+            # Waits for the command to finish
+            result = stdout.channel.recv_exit_status()
             return stdin, stdout, stderr
 
         # Disconnect from the machine
@@ -200,7 +201,5 @@ class ConfigTower:
         # Clones the repo
         def clone_repo(self, repository, dpl_key_path):
             stdin, stdout, stderr = self.exec_command('ssh-agent bash -c \'ssh-add ' + dpl_key_path + '; git clone ' + repository +'\' ' + self.path, False)
-            # Waits for the command to finish
-            result = stdout.channel.recv_exit_status()
 
 ConfigTower('configs.yml').execute()
