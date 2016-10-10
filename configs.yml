@@ -1,12 +1,16 @@
 # Repository to clone
 repository: git@bitbucket.org:charmpitz/configs.git
+
 # Deployment Public Key
 deployment_key: /home/ady/configs/deployment_key
+
+# Git credentials
 git:
     credentials:
         name: Ioan-Andrei Pit-Rada
         email: charmpitz@gmail.com
-# Machines Credentials
+
+# Machines Credentials and Configurations
 machines:
     -
         hostname: dev.tes.etsgbv-work.com
@@ -20,11 +24,33 @@ machines:
         password: ubuntu
         ssh_key:
         path: /home/ubuntu/configs
-    # -
-    #     hostname: symfony-dev.local
-    #     username: vagrant
-    #     password: vagrant
-    #     ssh_key: /home/ady/workspace/vagrant_symfony/puphpet/files/dot/ssh/id_rsa
-    #     path: /home/vagrant/configs
-
-
+    -
+        hostname: dev.site.etsgbv-work.com
+        username: ubuntu
+        password: ubuntu
+        ssh_key:
+        path: /home/ubuntu/configs
+    -
+        hostname: dev.esf.etsgbv-work.com
+        username: ubuntu
+        password: ubuntu
+        ssh_key:
+        path: /home/ubuntu/configs
+    -
+        hostname: dev.workers.etsgbv-work.com
+        username: ubuntu
+        password: ubuntu
+        ssh_key:
+        path: /home/ubuntu/configs
+    -
+        hostname: dev.amqp.etsgbv-work.com
+        username: ubuntu
+        password: ubuntu
+        ssh_key:
+        path: /home/ubuntu/configs
+    -
+        hostname: dev.db.mysql.etsgbv-work.com
+        username: ubuntu
+        password: ubuntu
+        ssh_key:
+        path: /home/ubuntu/configs

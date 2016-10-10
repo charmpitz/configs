@@ -11,21 +11,23 @@ class Print:
     BLUE = '\033[94m'
     PURPLE = '\033[95m'
     END = '\033[0m'
+    LVL1 = '  '
+    LVL2 = '    '
 
     @classmethod
-    def red(cls, s): print(cls.RED + s + cls.END)
+    def red(cls, s, l = ''): print(l + cls.RED + s + cls.END)
 
     @classmethod
-    def blue(cls, s): print(cls.BLUE + s + cls.END)
+    def blue(cls, s, l = ''): print(l + cls.BLUE + s + cls.END)
 
     @classmethod
-    def green(cls, s): print(cls.GREEN + s + cls.END)
+    def green(cls, s, l = ''): print(l + cls.GREEN + s + cls.END)
 
     @classmethod
-    def yellow(cls, s): print(cls.YELLOW + s + cls.END)
+    def yellow(cls, s, l = ''): print(l + cls.YELLOW + s + cls.END)
 
     @classmethod
-    def purple(cls, s): print(cls.PURPLE + s + cls.END)
+    def purple(cls, s, l = ''): print(l + cls.PURPLE + s + cls.END)
 
 class ConfigTower:
     # Machines data
@@ -52,7 +54,7 @@ class ConfigTower:
         with open(config_file, 'r') as stream:
             try:
                 config = yaml.load(stream)
-                Print.purple('Config file was imported with success.')
+                Print.green('Config file was imported with success.')
             except yaml.YAMLError as exc:
                 Print.red(exc)
                 sys.exit()
@@ -71,7 +73,7 @@ class ConfigTower:
                 if not machine.connect():
                     Print.red('SSH key and password are missing.')
                     continue
-                Print.yellow('Connected to ' + machine.hostname)
+                Print.green('Connected to ' + machine.hostname)
                 # Check if already installed
                 if machine.path_exists() == True:
                     # Update
@@ -100,8 +102,8 @@ class ConfigTower:
                 Print.red(machine.hostname + ': Something went wrong.')
             finally:
                 machine.disconnect()
-                Print.yellow('Connection to ' + machine.hostname + ' closed.')
-        Print.purple('Everything went accordingly.')
+                Print.green('Connection to ' + machine.hostname + ' closed.')
+        Print.green('Everything went accordingly.')
 
 
     class Machine:
@@ -200,6 +202,6 @@ class ConfigTower:
 
         # Clones the repo
         def clone_repo(self, repository, dpl_key_path):
-            stdin, stdout, stderr = self.exec_command('ssh-agent bash -c \'ssh-add ' + dpl_key_path + '; git clone ' + repository +'\' ' + self.path, False)
+            stdin, stdout, stderr = self.exec_command('ssh-agent bash -c \'if [ ! -n "$(grep "^bitbucket.org " ~/.ssh/known_hosts)" ]; then ssh-keyscan bitbucket.org >> ~/.ssh/known_hosts 2>/dev/null; fi; ssh-add ' + dpl_key_path + '; yes | git clone ' + repository +'\' ' + self.path, False)
 
 ConfigTower('configs.yml').execute()
