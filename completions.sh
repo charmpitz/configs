@@ -4,6 +4,9 @@
 # Include git completion
 source $CONFIG_PATH/completions/git.bash
 
+# Include npm completions
+source $CONFIG_PATH/completions/npm.bash
+
 # Include symfony, composer, phpspec, behat completion
 source $CONFIG_PATH/completions/symfony.bash
 
