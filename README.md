@@ -7,18 +7,6 @@ sudo apt-get install bash-completion
 ```
 
 ### Installation
-1) Set Up Git
-```
-git config --global user.name "Andrei Pit"
-git config --global user.email "charmpitz@gmail.com"
-```
-
-2) Add ssh key
-```
-cat ~/.ssh/id_rsa.pub | xclip -sel clip
-```
-
-3) Install
 ```
 cd ~/
 git clone git@bitbucket.org:charmpitz/configs.git
