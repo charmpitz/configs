@@ -21,4 +21,10 @@ source $CONFIG_PATH/completions/ansible-playbook.bash
 source $CONFIG_PATH/completions/ansible-pull.bash
 source $CONFIG_PATH/completions/ansible-vault.bash
 
+# Include yarn completions
+source $CONFIG_PATH/completions/yarn.bash
+
+# Include angular cli
+source $CONFIG_PATH/completions/ng.bash
+
 
