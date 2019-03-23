@@ -4,16 +4,6 @@ alias ..="cd .."
 # Up 2 levels
 alias ...="cd ../../"
 
-# Go to ~/workspace
-alias work="cd ~/workspace"
-
-# Go to /var/www
-alias www="cd /var/www"
-
-# Alternative to `tail -f`
-alias lnav="lnav -c ":enable-word-wrap" $@"
-alias log="${CONFIG_PATH}/bin/lnav -c ":enable-word-wrap" $@"
-
 # Colored and classified
 alias ls='ls -F --color=always'
 
@@ -35,9 +25,6 @@ alias mv='mv -iv'
 # Colored, ignore case grep
 alias grep='grep --color=auto -i'
 
-# Edit
-alias E='sudo nano $@'
-
 # Install and automplete
 alias I='sudo apt-get install $@'
 complete -F _get_packages_autocomplete I
@@ -55,14 +42,6 @@ complete -F _get_service_autocomplete S
 
 # Fix web directory permissions 755 644
 alias fix_web_permissions='sudo find * -type d -print0 | sudo xargs -0 chmod 0775 && sudo find * -type f -print0 | sudo xargs -0 chmod 0664'
-
-# Fix symfony write permissions
-alias fix_sf_permissions='sudo chmod -R g+w var/logs/; sudo chmod -R g+w var/cache/'
-
-# Vagrant alias
-alias v='vagrant $@'
-make_completion_wrapper vagrant _get_vagrant_autocomplete vagrant
-complete -F _get_vagrant_autocomplete v
 
 # Search for something (what, where)
 alias ss='grep -Hirn $1 $2 2>/dev/null'
