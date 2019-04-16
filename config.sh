@@ -1,12 +1,12 @@
 # Don't put duplicate lines or lines starting with space in the history.
-HISTCONTROL=ignoreboth
+HISTCONTROL=ignoreboth:erasedups
 
 # Append to the history file, don't overwrite it
 shopt -s histappend
 
 # For setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=10000
-HISTFILESIZE=20000
+HISTSIZE=100000
+HISTFILESIZE=200000
 
 # Force color prompt
 force_color_prompt=yes
@@ -22,3 +22,6 @@ PATH=$PATH:~/.composer/vendor/bin
 
 # Bash PS1
 export PS1="[⚬ \t ⚬ \[\e[33m\]\u\[\e[m\]\[\e[33m\]@\[\e[m\]\[\e[33m\]\h\[\e[m\] \[\e[34m\]\w\[\e[m\]] \[\e[32m\]\`parse_git_branch\`\[\e[m\]\[\e[33m\]⚡\[\e[m\] "
+
+# Save and reload the history after each command finishes
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"

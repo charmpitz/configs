@@ -2,12 +2,11 @@
 
 ### Features
 - Git branch support
+- Shared history between sessions
 - Colored syntax on `grep` usage
 - Confirmation on removing files
 - Improved auto-completions
 - Aliases
-
-[![asciicast](https://asciinema.org/a/95sGrF5IS1dxNQqxMYJ0wUzk4.svg)](https://asciinema.org/a/95sGrF5IS1dxNQqxMYJ0wUzk4)
 
 ### Installation
 ```
