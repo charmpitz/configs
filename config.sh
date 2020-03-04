@@ -24,4 +24,4 @@ PATH=$PATH:~/.composer/vendor/bin
 export PS1="[⚬ \t ⚬ \[\e[33m\]\u\[\e[m\]\[\e[33m\]@\[\e[m\]\[\e[33m\]\h\[\e[m\] \[\e[34m\]\w\[\e[m\]] \[\e[32m\]\`parse_git_branch\`\[\e[m\]\[\e[33m\]⚡\[\e[m\] "
 
 # Save and reload the history after each command finishes
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
